@@ -116,8 +116,8 @@ SERPAPI_KEY=your_serpapi_key
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/krishkumar84/WatchTheDrop-v2.git
-   cd WatchTheDrop-v2
+   git clone https://github.com/ayushgupta010/WatchTheDrop
+   cd WatchTheDrop
    ```
 
 2. **Install dependencies**:
@@ -256,9 +256,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙋‍♂️ Support & Contact
 
-- **Developer**: [Krish](https://github.com/krishkumar84)
-- **Project Repository**: [WatchTheDrop-v2](https://github.com/krishkumar84/WatchTheDrop-v2)
-- **Issues**: [Report bugs or request features](https://github.com/krishkumar84/WatchTheDrop-v2/issues)
+- **Developer**: [Ayush](https://github.com/ayushgupta010)
+- **Project Repository**: [WatchTheDrop-v2](https://github.com/ayushgupta010/WatchTheDrop)
+- **Issues**: [Report bugs or request features](https://github.com/ayushgupta010/WatchTheDrop/issues)
 
 ## 🏆 Acknowledgments
 
@@ -270,4 +270,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ by [Krish](https://github.com/krishkumar84) | Star ⭐ this repo if you found it helpful!
+Made with ❤️ by [Ayush](https://github.com/ayushgupta010) | Star ⭐ this repo if you found it helpful!
