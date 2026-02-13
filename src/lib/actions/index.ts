@@ -12,10 +12,10 @@ import { headers } from "next/headers";
 import { Ratelimit } from "@upstash/ratelimit";
 
 
-const ratelimit = new Ratelimit({ 
+const ratelimit = redis ? new Ratelimit({ 
   redis: redis, 
   limiter: Ratelimit.fixedWindow(3, '60s'), 
-});
+}) : undefined;
 export async function scrapeAndStoreProducts(producturl: string) {
 
   if (!producturl) return null;
@@ -97,6 +97,7 @@ export async function getAllProducts() {
      const products = await Product.find();
      return products
   } catch (error:any) {
+    console.error('getAllProducts failed:', error);
     throw new Error(`Failed to create/update product: ${error.message}`)
   }
 }
@@ -132,13 +133,15 @@ export async function getSimilarProducts(productId: string) {
 export async function addUserEmailToProduct(productId: string, userEmail: string) {
    const ip = headers().get("x-forwarded-for") ;
 console.log(ip);
-const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip!);
-console.log(success, pending, limit, reset, remaining);
+  if (ratelimit) {
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip!);
+    console.log(success, pending, limit, reset, remaining);
 
-if (!success) {
-  // Router.push("/blocked");
-  return {error: "bhai ab try mt kr"};
-}
+    if (!success) {
+      // Router.push("/blocked");
+      return {error: "bhai ab try mt kr"};
+    }
+  }
   try {
     const product = await Product.findById(productId);
 

@@ -16,16 +16,16 @@ const Notification = {
   THRESHOLD_MET: 'THRESHOLD_MET',
 }
 
-const ratelimit = new Ratelimit({ 
-  redis: redis, 
-  limiter: Ratelimit.fixedWindow(2, '300s'), 
-});
+const ratelimit = redis ? new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.fixedWindow(2, '300s'),
+}) : undefined;
 
 export async function generateEmailBody(
   product: EmailProductInfo,
   type: NotificationType
-  ) {
-    
+) {
+
   const THRESHOLD_PERCENTAGE = 40;
   const shortenedTitle =
     product.title.length > 20
@@ -103,16 +103,18 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
-  const ip = headers().get("x-forwarded-for") ;
+  const ip = headers().get("x-forwarded-for");
   console.log(ip);
-  const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip!);
-  console.log(success, pending, limit, reset, remaining);
-  
-  if (!success) {
-    // Router.push("/blocked");
-    return {error: "bhai ab try mt kr"};
+  if (ratelimit) {
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip!);
+    console.log(success, pending, limit, reset, remaining);
+
+    if (!success) {
+      // Router.push("/blocked");
+      return { error: "bhai ab try mt kr" };
+    }
   }
-  
+
   const mailOptions = {
     from: 'krish221200867@gmail.com',
     to: sendTo,
@@ -123,9 +125,9 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent: ', info);
-    return info; 
+    return info;
   } catch (error) {
     console.error('Error sending email:', error);
-    throw error; 
+    throw error;
   }
 };

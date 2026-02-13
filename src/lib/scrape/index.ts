@@ -33,15 +33,15 @@ import { redis } from "../../app/config/ratelimit";
 import { headers } from "next/headers";
 import { Ratelimit } from "@upstash/ratelimit";
 
-const ratelimit = new Ratelimit({
+const ratelimit = redis ? new Ratelimit({
   redis: redis,
   limiter: Ratelimit.fixedWindow(4, "100s"),
-});
+}) : undefined;
 
 export async function scrapeAmazonProducts(url: string) {
   const username = String(process.env.BRIGHT_DATA_USERNAME);
   const password = String(process.env.BRIGHT_DATA_PASSWORD);
-  
+
   if (!username || !password || username === 'your_username' || password === 'your_password') {
     console.log("❌ BrightData credentials missing or invalid.");
     throw new Error("BrightData credentials are not set in .env");
@@ -197,7 +197,7 @@ export async function scrapeAmazonProducts(url: string) {
       console.log(
         "- .a-price-symbol + .a-price-whole:",
         $(".a-price-symbol").first().text().trim() +
-          $(".a-price-whole").first().text().trim()
+        $(".a-price-whole").first().text().trim()
       );
 
       // Show first few individual .a-price elements
@@ -405,14 +405,17 @@ export async function googleProductSave(ProductGoogle: Product) {
 export async function googleShoppingResult(title: string) {
   const ip = headers().get("x-forwarded-for");
   console.log(ip);
-  const { success, pending, limit, reset, remaining } = await ratelimit.limit(
-    ip!
-  );
-  console.log(success, pending, limit, reset, remaining);
 
-  if (!success) {
-    // Router.push("/blocked");
-    return { error: "bhai ab try mt kr" };
+  if (ratelimit) {
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(
+      ip!
+    );
+    console.log(success, pending, limit, reset, remaining);
+  
+    if (!success) {
+      // Router.push("/blocked");
+      return { error: "bhai ab try mt kr" };
+    }
   }
 
   try {
@@ -439,14 +442,17 @@ export async function googleShoppingResult(title: string) {
 export async function getGoogleresult(title: string) {
   const ip = headers().get("x-forwarded-for");
   console.log(ip);
-  const { success, pending, limit, reset, remaining } = await ratelimit.limit(
-    ip!
-  );
-  console.log(success, pending, limit, reset, remaining);
 
-  if (!success) {
-    // Router.push("/blocked");
-    return { error: "bhai ab try mt kr" };
+  if (ratelimit) {
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(
+      ip!
+    );
+    console.log(success, pending, limit, reset, remaining);
+  
+    if (!success) {
+      // Router.push("/blocked");
+      return { error: "bhai ab try mt kr" };
+    }
   }
 
   try {
