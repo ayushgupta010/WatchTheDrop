@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
   currentPrice: { type: Number, required: true },
   originalPrice: { type: Number, required: true },
   priceHistory: [
-    { 
+    {
       price: { type: Number, required: true },
       date: { type: Date, default: Date.now }
     },
@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
   isOutOfStock: { type: Boolean, default: false },
   geturl: { type: String, required: false, unique: true },
   users: [
-    {email: { type: String, required: true}}
+    { email: { type: String, required: true } }
   ], default: [],
 }, { timestamps: true });
 

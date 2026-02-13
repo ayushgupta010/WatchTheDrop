@@ -9,6 +9,7 @@ const Home = async () => {
   return (
     <>
       <section
+        id="home"
         className="px-4 md:pl-12"
         style={{
           backgroundImage: `url(${"/assets/images/Backgroundimage.png"})`,
@@ -49,7 +50,7 @@ const Home = async () => {
         </div>
       </section>
 
-      <section className="flex flex-col gap-10 px-6 md:px-20 py-24">
+      <section id="explore" className="flex flex-col gap-10 px-6 md:px-20 py-24">
         <h2 className="text-secondary text-[32px] font-semibold">Trending</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-16 gap-y-24 py-8">

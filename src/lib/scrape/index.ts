@@ -41,6 +41,12 @@ const ratelimit = new Ratelimit({
 export async function scrapeAmazonProducts(url: string) {
   const username = String(process.env.BRIGHT_DATA_USERNAME);
   const password = String(process.env.BRIGHT_DATA_PASSWORD);
+  
+  if (!username || !password || username === 'your_username' || password === 'your_password') {
+    console.log("❌ BrightData credentials missing or invalid.");
+    throw new Error("BrightData credentials are not set in .env");
+  }
+
   const port = 22225;
   const session_id = (1000000 * Math.random()) | 0;
 

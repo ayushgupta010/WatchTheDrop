@@ -1,4 +1,5 @@
 "use server"
+import mongoose from "mongoose";
 import {  scrapeAmazonProducts} from "../scrape";
 import { connectToDB } from "../mongoose";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utlis";
@@ -19,7 +20,7 @@ export async function scrapeAndStoreProducts(producturl: string) {
 
   if (!producturl) return null;
   try {
-      connectToDB();
+      await connectToDB();
       // const scrapedProduct = await scrapeAmazonProducts(producturl);
       const url = new URL(producturl);
         const hostname = url.hostname;
@@ -76,7 +77,7 @@ export async function scrapeAndStoreProducts(producturl: string) {
 
 export async function getProductById(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const product = await Product.findOne({ _id: productId });
 
@@ -91,7 +92,8 @@ export async function getProductById(productId: string) {
 
 export async function getAllProducts() {
   try {
-    connectToDB();
+    await connectToDB();
+    console.log('getAllProducts: connection readyState:', mongoose.connection.readyState);
      const products = await Product.find();
      return products
   } catch (error:any) {
@@ -101,7 +103,7 @@ export async function getAllProducts() {
 
 export async function getSimilarProducts(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     // const currentProduct = await Product.findById(productId);
 

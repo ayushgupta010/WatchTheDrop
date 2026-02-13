@@ -1,13 +1,17 @@
 'use client'
+import Image from "next/image";
+
 export default function Error() {
  
     return (
       <div className="mx-auto w-full max-w-7xl px-2 md:px-4">
       <div className="my-12 flex items-center justify-center px-2 md:my-44 md:px-0">
         <div className="lg:flex lg:items-center lg:space-x-10">
-          <img
+          <Image
             src="https://illustrations.popsy.co/white/resistance-band.svg"
             alt="question-mark"
+            width={300}
+            height={300}
             className="h-[300px] w-auto"
           />
           <div>
