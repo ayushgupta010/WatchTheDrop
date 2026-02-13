@@ -109,10 +109,17 @@ git clone https://github.com/krishkumar84/WatchTheDrop-v2.git
 cd WatchTheDrop-v2
 ```
 
+<<<<<<< HEAD
 2. Install dependencies:
 ```bash
 npm install
 ```
+=======
+   ```bash
+   git clone https://github.com/ayushgupta010/WatchTheDrop
+   cd WatchTheDrop
+   ```
+>>>>>>> 56f3a496b1b25c69212d07c94ce2e4e881fe621e
 
 3. Set up environment variables:
 ```bash
@@ -231,9 +238,15 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙋♂️ Support & Contact
 
+<<<<<<< HEAD
 - **Developer**: Krish
 - **Project Repository**: [WatchTheDrop-v2](https://github.com/krishkumar84/WatchTheDrop-v2)
 - **Issues**: Report bugs or request features
+=======
+- **Developer**: [Ayush](https://github.com/ayushgupta010)
+- **Project Repository**: [WatchTheDrop-v2](https://github.com/ayushgupta010/WatchTheDrop)
+- **Issues**: [Report bugs or request features](https://github.com/ayushgupta010/WatchTheDrop/issues)
+>>>>>>> 56f3a496b1b25c69212d07c94ce2e4e881fe621e
 
 ## 🏆 Acknowledgments
 
@@ -242,3 +255,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **PriceHistoryApp**: For enhanced price analytics
 - **Vercel**: For seamless deployment and hosting
 - **MongoDB**: For flexible and scalable database solutions
+<<<<<<< HEAD
+=======
+
+---
+
+Made with ❤️ by [Ayush](https://github.com/ayushgupta010) | Star ⭐ this repo if you found it helpful!
+>>>>>>> 56f3a496b1b25c69212d07c94ce2e4e881fe621e
