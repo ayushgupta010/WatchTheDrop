@@ -42,6 +42,26 @@ const Searchbar = () => {
 
     const platform = detectPlatform(searchPrompt);
 
+    // Disable search functionality due to API pricing
+    if (true) {
+        toast.error("🛑 Scrapping functionality is put on hold due to API pricing", {
+            position: "top-center",
+            duration: 4000,
+            style: {
+                fontSize: "14px",
+                padding: "12px 16px",
+                background: "#fee2e2",
+                color: "#b91c1c",
+                border: "1px solid #fecaca"
+            },
+        });
+        return;
+    }
+
+    // Search logic disabled
+    /*
+    const platform = detectPlatform(searchPrompt);
+
     // If it's not a valid URL, search for product name
     if (!platform) {
       router.push(`/shopping/${searchPrompt}`);
@@ -86,7 +106,7 @@ const Searchbar = () => {
         } else {
           toast.error("❌ Product not found or unavailable", {
             position: "top-center",
-          });
+            });
         }
       } catch (error) {
         console.log(error);
@@ -97,6 +117,7 @@ const Searchbar = () => {
         setIsLoading(false);
       }
     }
+    */
   };
 
   return (

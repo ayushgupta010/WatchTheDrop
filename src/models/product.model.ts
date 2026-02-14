@@ -23,9 +23,12 @@ const productSchema = new mongoose.Schema({
   stars: { type: Number },
   isOutOfStock: { type: Boolean, default: false },
   geturl: { type: String, required: false, unique: true },
-  users: [
-    { email: { type: String, required: true } }
-  ], default: [],
+  users: {
+        type: [
+            { email: { type: String, required: true } }
+        ],
+        default: [],
+    },
 }, { timestamps: true });
 
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
